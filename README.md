@@ -22,11 +22,3 @@ there are **two methods** of installing it:
    1. visit the [releases page](https://github.com/crawqxx/subterpresence/releases/tag/v1.0).
    2. download and install the `.exe` file.
    3. once installed, simply open the `.exe` file, and you're good to go!
-
----
-
-feel free to use markdown features like hyperlinks, code blocks, etc., for easier navigation and setup!
-
----
-
-this format is easier to follow and more accessible to users, with clickable links and clear instructions.
