@@ -2,6 +2,8 @@
 
 a python script to display **subter** discord rpc (manual setup, not automatic).
 
+UPD: I have 11 pm right now, im very sleepy but i finished automatizing, ill upload tutorial and new apps later.
+
 there are **two methods** of installing it:
 
 ---
