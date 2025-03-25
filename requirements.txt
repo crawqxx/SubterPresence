@@ -2,3 +2,5 @@ psutil
 pypresence
 pystray
 Pillow
+flask
+tkinter
