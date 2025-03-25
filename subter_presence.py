@@ -3,12 +3,14 @@ import psutil
 import time
 from pypresence import Presence
 from pystray import Icon, MenuItem, Menu
-from PIL import Image, ImageDraw
+from PIL import Image
 import threading
 import tkinter as tk
 import sys
 import ctypes
 from flask import Flask, request, jsonify
+import requests
+from io import BytesIO
 
 if sys.platform == 'win32':
     ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
@@ -86,22 +88,31 @@ def import_game():
     update_presence_status()
     return jsonify({"status": "success"})
 
-def create_image():
-    image = Image.new('RGB', (64, 64), color=(30, 30, 30))
-    draw = ImageDraw.Draw(image)
-    draw.text((10, 10), "Subter", fill=(255, 255, 255))
-    return image
+def load_tray_icon():
+    try:
+        return Image.open('logo.ico')
+    except FileNotFoundError:
+        try:
+            response = requests.get('https://github.com/crawqxx/SubterPresence/raw/main/img/logo.png')
+            img = Image.open(BytesIO(response.content))
+            
+            img.save('logo.ico', format='ICO')
+            return Image.open('logo.ico')
+        except Exception as e:
+            print(f"Error loading icon: {e}")
+            return Image.new('RGB', (64, 64), color=(30, 30, 30))
 
 def on_quit():
     RPC.clear()
     os._exit(0)
 
 def setup_tray():
+    icon_image = load_tray_icon()
     menu = Menu(
         MenuItem('Show', lambda: root.deiconify()),
         MenuItem('Quit', on_quit)
     )
-    icon = Icon("Subter", create_image(), "Subter Presence", menu)
+    icon = Icon("Subter", icon_image, "Subter Presence", menu)
     icon.run()
 
 def run_flask():
