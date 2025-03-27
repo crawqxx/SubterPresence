@@ -2,5 +2,5 @@ psutil
 pypresence
 pystray
 Pillow
+requests
 flask
-tkinter
